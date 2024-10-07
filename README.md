@@ -9,6 +9,12 @@
 - Ana Gabriela Fuentes Hernández A01383717
 - David Emmanuel Villanueva Martínez A01638389
 
+### Links Importantes:
+
+- [Repositorio Github](https://github.com/jorgechb/MLOps_Team14)
+- [Presentación Ejecutiva](https://www.canva.com/design/DAGS07C2Vyc/Q0pUguD4AfYOGY2HarbBwQ/edit?utm_content=DAGS07C2Vyc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [Video]()
+
 ## Estructura del proyecto
 
 ```
@@ -23,7 +29,7 @@
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
-├── pyproject.toml     <- Project configuration file with package metadata for 
+├── pyproject.toml     <- Project configuration file with package metadata for
 │                         mlops and configuration for tools like black
 │
 │
@@ -44,9 +50,9 @@
     │
     ├── features.py             <- Code to create features for modeling
     │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
+    ├── modeling
+    │   ├── __init__.py
+    │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
     └── plots.py                <- Code to create visualizations
