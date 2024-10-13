@@ -76,6 +76,31 @@ class DataAnalysis:
         plt.xticks(rotation=0)
         plt.show()
 
+
+    def handle_outliers(self, data):
+        #Eliminar valores atípicos y graficar boxplots
+        self.logger.info("Eliminando valores atípicos usando el rango intercuartílico (IQR)...")
+        numeric_columns = data.select_dtypes(include=np.number).columns
+        data_v2 = data.copy()
+
+        for col in numeric_columns:
+            Q1 = data[col].quantile(0.25)
+            Q3 = data[col].quantile(0.75)
+            IQR = Q3 - Q1
+            outlier_range = 1.5 * IQR
+
+            # Identificar y eliminar valores atípicos
+            outliers = (data[col] < Q1 - outlier_range) | (data[col] > Q3 + outlier_range)
+            outlier_percentage = (outliers.sum() / len(data)) * 100
+            data_v2 = data_v2[~outliers]
+
+            print(f"{col}: {outlier_percentage:.2f}% de valores atípicos eliminados")
+
+        # Graficar boxplots
+        self.plot_boxplots(data_v2, numeric_columns)
+
+        return data_v2
+    
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
         pass 
