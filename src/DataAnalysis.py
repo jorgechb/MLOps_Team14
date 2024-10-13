@@ -56,7 +56,14 @@ class DataAnalysis:
 
         return data_cleaned
     
+    # analisis de features categoricos 
+    def unique_values(self, data):
+        #Mostrar valores únicos en X categóricas
+        self.logger.info("Verificando valores únicos en columnas categóricas...")
+        for col in data.select_dtypes(include='object').columns:
+            print(f'Valores únicos en {col}: {data[col].unique()}')
     
+
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
         pass 
