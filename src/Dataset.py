@@ -13,13 +13,8 @@ class Dataset:
     def explore(self): 
         ## TODO: Include exploration from Data Analysis module
         analyzer = DataAnalysis(logger=self.logger)
-        analyzer.EDA(self.raw_df)
+        self.data_EDA = analyzer.EDA(self.raw_df)
         pass
-
-    def transform(self):
-        ## TODO:  Include proper transformations 
-        transformer = DataTransformer(logger=self.logger)
-        pass 
 
     def split_data(self, X, y):
         self.logger.info("Splitting data...")
@@ -38,7 +33,9 @@ class Dataset:
         self.logger.info(f'Test -> {self.xtest.shape}')
         self.logger.info(f'Validation -> {self.xval.shape}')
 
-
+    def transform(self):
+        transformer = DataTransformer(logger=self.logger)
+        self.XtrainT, self.ytrainT, self.XvalT, self.yvalT, self.XtestT, self.ytestT = transformer.transform_data(self.xtrain, self.ytrain, self.xval, self.yval, self.xtest, self.ytest)
      
 if __name__ == "__main__": 
     logger = create_logger()
