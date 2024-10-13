@@ -12,7 +12,7 @@
 ### Links Importantes:
 
 - [Repositorio Github](https://github.com/jorgechb/MLOps_Team14)
-- [Presentación Ejecutiva](https://www.canva.com/design/DAGS07C2Vyc/Q0pUguD4AfYOGY2HarbBwQ/edit?utm_content=DAGS07C2Vyc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [Presentación Ejecutiva](https://www.canva.com/design/DAGTaL2Y4dc/GJ4gBQqx5Rr6QvJZ_YBj2Q/edit?utm_content=DAGTaL2Y4dc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Video]()
 
 ## Estructura del proyecto
@@ -32,7 +32,6 @@
 ├── pyproject.toml     <- Project configuration file with package metadata for
 │                         mlops and configuration for tools like black
 │
-│
 ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
 │   └── figures        <- Generated graphics and figures to be used in reporting
 │
@@ -40,20 +39,19 @@
 │                         generated with `pip freeze > requirements.txt`
 │
 │
-└── mlops   <- Source code for use in this project.
+└── src   <- Source code for use in this project.
     │
-    ├── __init__.py             <- Makes mlops a Python module
+    ├── __init__.py             <- Makes src a Python module
     │
-    ├── config.py               <- Store useful variables and configuration
+    ├── DataAnalysis.py         <- Analysis module 
     │
-    ├── dataset.py              <- Scripts to download or generate data
+    ├── Dataset.py              <- Creates dataset and gets it ready for ML
     │
-    ├── features.py             <- Code to create features for modeling
+    ├── DataTransformer.py      <- Data Transformations module
     │
-    ├── modeling
-    │   ├── __init__.py
-    │   ├── predict.py          <- Code to run model inference with trained models
-    │   └── train.py            <- Code to train models
+    ├── Model.py                <- ML algorithm wrapper 
+    |
+    ├── DataLoader.py           <- Fetch raw data 
     │
-    └── plots.py                <- Code to create visualizations
+    └── utilities.py            <- Common utilities between scripts
 ```
