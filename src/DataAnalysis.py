@@ -1,5 +1,7 @@
 import pandas as pd
-
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
 class DataAnalysis: 
     def __init__(self, logger):
         self.logger = logger
