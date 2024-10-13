@@ -40,6 +40,23 @@ class DataAnalysis:
         self.logger.info("Verificando valores nulos por columna...")
         print(data.isnull().sum() / len(data) * 100)
 
+    def handle_missing_data(self, data):
+        #elimina valores con mas de 20% null NAN
+        self.logger.info("Eliminando columnas con más del 20 por ciento de valores nulos...")
+        null_percentage = data.isnull().sum() / len(data) * 100
+        columns_to_drop = null_percentage[null_percentage > 20].index.tolist()
+        data_cleaned = data.drop(columns=columns_to_drop)
+
+        print("Columnas eliminadas:")
+        for column in columns_to_drop:
+            print(f"- {column}: Más del 20% de valores nulos.")
+        
+        # Rellena valores nulos en columnas específicas
+        data_cleaned[['gill-attachment', 'ring-type']] = data_cleaned[['gill-attachment', 'ring-type']].fillna('no_data')
+
+        return data_cleaned
+    
+    
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
         pass 
