@@ -29,6 +29,17 @@ class DataAnalysis:
 
         return data_cleaned
 
+    def describe_data(self, data):
+        #Describe la data general 
+        self.logger.info("Descripción general del dataset...")
+        print(data.describe())
+        print(data.describe(include='object'))
+        print(f"Dimensiones del dataset: {data.shape}")
+
+        # Verifica nulos
+        self.logger.info("Verificando valores nulos por columna...")
+        print(data.isnull().sum() / len(data) * 100)
+
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
         pass 
