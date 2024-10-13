@@ -63,6 +63,18 @@ class DataAnalysis:
         for col in data.select_dtypes(include='object').columns:
             print(f'Valores únicos en {col}: {data[col].unique()}')
     
+    # variable y
+    def plot_class_distribution(self, data, target_col):
+        #Graficos la distribución de la variable objetivo (clase)
+        self.logger.info(f"Graficando la distribución de {target_col}...")
+        class_counts = data[target_col].value_counts()
+        plt.figure(figsize=(5, 3))
+        class_counts.plot(kind='bar', color=['green', 'blue'])
+        plt.title('Distribución de Clases')
+        plt.xlabel('Clase')
+        plt.ylabel('Frecuencia')
+        plt.xticks(rotation=0)
+        plt.show()
 
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
