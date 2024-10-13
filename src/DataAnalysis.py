@@ -76,6 +76,7 @@ class DataAnalysis:
         plt.xticks(rotation=0)
         plt.show()
 
+    #manejo outliers 
 
     def handle_outliers(self, data):
         #Eliminar valores atípicos y graficar boxplots
@@ -100,6 +101,18 @@ class DataAnalysis:
         self.plot_boxplots(data_v2, numeric_columns)
 
         return data_v2
+    
+    # analisis varaibles numericas despues de outliers
+    def plot_boxplots(self, data, columns):
+        #Graficar boxplots para las columnas numéricas
+        self.logger.info("Graficando boxplots para las columnas numéricas...")
+        plt.figure(figsize=(12, 6))
+        for i, col in enumerate(columns, 1):
+            plt.subplot(1, len(columns), i)
+            plt.boxplot(data[col])
+            plt.title(f'Box Plot de {col}')
+            plt.ylabel('Valores')
+        plt.show()
     
     def EDA(self, dataset): 
         self.logger.info("Performing Exploratory Data Analysis...")
