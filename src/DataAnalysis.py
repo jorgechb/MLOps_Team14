@@ -114,6 +114,16 @@ class DataAnalysis:
             plt.ylabel('Valores')
         plt.show()
     
-    def EDA(self, dataset): 
-        self.logger.info("Performing Exploratory Data Analysis...")
-        pass 
+
+    def plot_numeric_distributions(self, data):
+        #Graficar distribuciones de las columnas numéricas
+        self.logger.info("Graficando distribuciones de columnas numéricas...")
+        numeric_columns = data.select_dtypes(include=np.number).columns
+        plt.figure(figsize=(12, 6))
+        for i, col in enumerate(numeric_columns, 1):
+            plt.subplot(1, len(numeric_columns), i)
+            plt.hist(data[col], bins=30, edgecolor='k', alpha=0.7)
+            plt.title(f'Distribución de {col}')
+            plt.xlabel(col)
+            plt.ylabel('Frecuencia')
+        plt.show()
