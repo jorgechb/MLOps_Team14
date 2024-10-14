@@ -58,9 +58,9 @@ class DataTransformer:
         XvalT[self.num_columns] = scaler.transform(XvalT[self.num_columns])
         XtestT[self.num_columns] = scaler.transform(XtestT[self.num_columns])
         # Visualización de Media y Desviación Estándar de los 3 conjuntos
-        self.logger.info(f'XtrainT: \nMedia: \n', XtrainT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XtrainT[self.num_columns].std())
-        self.logger.info(f'\nXvalT: \nMedia: \n', XvalT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XvalT[self.num_columns].std())
-        self.logger.info(f'\nXtestT: \nMedia: \n', XtestT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XtestT[self.num_columns].std())
+        # self.logger.info(f'XtrainT: \nMedia: \n', XtrainT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XtrainT[self.num_columns].std())
+        # self.logger.info(f'\nXvalT: \nMedia: \n', XvalT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XvalT[self.num_columns].std())
+        # self.logger.info(f'\nXtestT: \nMedia: \n', XtestT[self.num_columns].mean(),f'\nDesviación Estándar: \n', XtestT[self.num_columns].std())
         # Regresa los 3 conjuntos ya transformados por la función 
         return XtrainT, XvalT, XtestT
     

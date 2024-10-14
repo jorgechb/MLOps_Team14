@@ -3,6 +3,7 @@ import os
 import logging
 import joblib
 import json  
+import numpy as np
 from utilities import create_logger, get_config
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report

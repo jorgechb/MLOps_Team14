@@ -34,11 +34,11 @@ logger:
       class: logging.handlers.RotatingFileHandler
       formatter: simple
       filename: "../logs/log.log"
-      maxBytes: 100000
+      maxBytes: 1000000
       backupCount: 3
   loggers: 
     root:
-      level: DEBUG 
+      level: INFO
       handlers: 
       - stdout
       - file  
