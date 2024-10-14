@@ -15,6 +15,10 @@
 - [Presentación Ejecutiva](https://www.canva.com/design/DAGTaL2Y4dc/GJ4gBQqx5Rr6QvJZ_YBj2Q/edit?utm_content=DAGTaL2Y4dc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Video]()
 
+## Abstract del proyecto:
+
+Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza técnicas de Machine Learning en un entorno de MLOps. Incluye un pipeline completo de limpieza de datos, gestión de outliers y análisis exploratorio de datos (EDA), además de transformaciones para mejorar la precisión del modelo. Con roles claramente definidos, como SME, Data Scientist, Software Engineers, DevOps, Model Risk Managers y ML Architects, se ha implementado una metodología MLOps que asegura un flujo de trabajo automatizado, eficiente y escalable. Este enfoque colaborativo garantiza la calidad, el despliegue continuo y la alineación con los objetivos de negocio, promoviendo la reproducibilidad y la gestión de riesgos en el modelado de datos.
+
 ## Estructura del proyecto
 
 ```
@@ -43,15 +47,15 @@
     │
     ├── __init__.py             <- Makes src a Python module
     │
-    ├── DataAnalysis.py         <- Analysis module 
+    ├── DataAnalysis.py         <- Analysis module
     │
     ├── Dataset.py              <- Creates dataset and gets it ready for ML
     │
     ├── DataTransformer.py      <- Data Transformations module
     │
-    ├── Model.py                <- ML algorithm wrapper 
+    ├── Model.py                <- ML algorithm wrapper
     |
-    ├── DataLoader.py           <- Fetch raw data 
+    ├── DataLoader.py           <- Fetch raw data
     │
     └── utilities.py            <- Common utilities between scripts
 ```
