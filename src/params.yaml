@@ -1,5 +1,5 @@
 file_paths:
-  raw_dataset: '..\data\raw\raw_dataset.csv'
+  raw_dataset: 'data\raw\raw_dataset.csv'
   processed_dataset: '..\processed\processed\'
   log_path: '..\logs'
   reports_path: '..\reports'

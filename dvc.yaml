@@ -1,0 +1,18 @@
+stages:
+  split_data:
+    cmd: python src\main.py -p split_data
+    deps:
+    - src/main.py
+  transform:
+    cmd: python src\main.py -p transform
+    deps:
+    - src/main.py
+  train:
+    cmd: python src\main.py -p train
+    deps:
+    - src/main.py
+  evaluate:
+    cmd: python src\main.py -p evaluate
+    deps:
+    - src/main.py
+
