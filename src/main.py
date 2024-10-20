@@ -12,7 +12,7 @@ import json
 import os
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000/") 
-mlflow.set_experiment("Equipo13_MLOps")
+mlflow.set_experiment("Equipo14_MLOps")
 
 def load_metrics(file_path):
     """Leer los archivos o resultados del JSON del test."""
@@ -45,6 +45,24 @@ class Pipeline:
         elif self.phase == 'evaluate': 
             self.logger.info("Executing evaluate phase...") 
             self.model.evaluate()
+
+            metrics_path = "models/metrics.json"
+
+            if os.path.exists(metrics_path):
+                metrics = load_metrics(metrics_path)['Validation']
+                #tracking_url = mlflow.get_tracking_uri()
+                print('En el if de metrics')
+                print(metrics['accuracy'])
+                with mlflow.start_run():
+                     self.logger.info("ML_Flow...") 
+                     mlflow.log_params(self.config['hyperparameters'])
+
+                     mlflow.log_metric('accuracy', metrics['accuracy'])
+                     mlflow.log_metric('precision', metrics['precision'])
+                     mlflow.log_metric('recall', metrics['recall'])
+                     mlflow.log_metric('f1_score', metrics['f1_score'])
+            else:
+                self.logger.error(f"Metrics file not found at {metrics_path}") 
         else: 
             self.logger.info("Executing complete pipeline...") 
             self.dataset.explore()
@@ -53,13 +71,14 @@ class Pipeline:
             self.model.train()
             self.model.evaluate()
 
-            metrics_path = "src/metrics.json"
+            metrics_path = "models/metrics.json"
 
             if os.path.exists(metrics_path):
                 metrics = load_metrics(metrics_path)
-                tracking_url = mlflow.get_tracking_uri()
+                #tracking_url = mlflow.get_tracking_uri()
 
                 with mlflow.start_run():
+                     self.logger.info("ML_Flow...") 
                      mlflow.log_params(self.config['hyperparameters'])
 
                      mlflow.log_metric('accuracy', metrics['accuracy'])
