@@ -1,6 +1,7 @@
 file_paths:
   raw_dataset: "data/raw/raw_dataset.csv"
   processed_explored_dataset: "data/processed/explored/explored_dataset.csv"
+  split_dataset: "data/processed/split"
   log_path: "../logs"
   reports_path: "../reports"
   model_path: "../models/model.joblib"

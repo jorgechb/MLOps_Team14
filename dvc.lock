@@ -9,8 +9,8 @@ stages:
       size: 2835258
     - path: src/main.py
       hash: md5
-      md5: 32afadaa383d266a05c97ce41e7f9abc
-      size: 2709
+      md5: 31634906f4f1dc00b3f16896cd843a29
+      size: 2707
     outs:
     - path: data/processed/split/xtest.csv
       hash: md5
@@ -39,31 +39,80 @@ stages:
   transform:
     cmd: python src/main.py -p transform
     deps:
+    - path: data/processed/split/xtest.csv
+      hash: md5
+      md5: 27cb9efbc189aea7209dfb59fbafb13f
+      size: 543018
+    - path: data/processed/split/xtrain.csv
+      hash: md5
+      md5: b2f967658b2977ecb095e73b7b30ea13
+      size: 1627681
+    - path: data/processed/split/xval.csv
+      hash: md5
+      md5: 8c926c4ab4c4ce57cbc7e7394f09f2ed
+      size: 542887
+    - path: data/processed/split/ytest.csv
+      hash: md5
+      md5: 619f69f40c9afc731b94a3973e4a1eb8
+      size: 24434
+    - path: data/processed/split/ytrain.csv
+      hash: md5
+      md5: e829cf2aac23c94063b172879282161f
+      size: 73288
+    - path: data/processed/split/yval.csv
+      hash: md5
+      md5: a474229227ba5d1f0546623622dd5797
+      size: 24434
     - path: src/main.py
       hash: md5
-      md5: 32afadaa383d266a05c97ce41e7f9abc
-      size: 2709
+      md5: 31634906f4f1dc00b3f16896cd843a29
+      size: 2707
+    outs:
+    - path: data/processed/transformed/xtestT.csv
+      hash: md5
+      md5: 079a43e46a3bf8c5000acbea02b55753
+      size: 1066539
+    - path: data/processed/transformed/xtrainT.csv
+      hash: md5
+      md5: e64f886d54a0c9e1b143a497836f2387
+      size: 3199791
+    - path: data/processed/transformed/xvalT.csv
+      hash: md5
+      md5: 4a839afa5e7f8b0c5106440ebc5e3eb4
+      size: 1066373
+    - path: data/processed/transformed/ytestT.csv
+      hash: md5
+      md5: 637142c6cabbdd35d6defb54a3734861
+      size: 24434
+    - path: data/processed/transformed/ytrainT.csv
+      hash: md5
+      md5: 9a81bee7242622e4a4010951e9899aa4
+      size: 73288
+    - path: data/processed/transformed/yvalT.csv
+      hash: md5
+      md5: 6967fc3a7e1a49c1e2ef6efff6aa90e9
+      size: 24434
   train:
     cmd: python src/main.py -p train
     deps:
     - path: src/main.py
       hash: md5
-      md5: 32afadaa383d266a05c97ce41e7f9abc
-      size: 2709
+      md5: 31634906f4f1dc00b3f16896cd843a29
+      size: 2707
   evaluate:
     cmd: python src/main.py -p evaluate
     deps:
     - path: src/main.py
       hash: md5
-      md5: 32afadaa383d266a05c97ce41e7f9abc
-      size: 2709
+      md5: 31634906f4f1dc00b3f16896cd843a29
+      size: 2707
   explore:
     cmd: python src/main.py -p explore
     deps:
     - path: src/main.py
       hash: md5
-      md5: 32afadaa383d266a05c97ce41e7f9abc
-      size: 2709
+      md5: 31634906f4f1dc00b3f16896cd843a29
+      size: 2707
     outs:
     - path: data/processed/explored/explored_dataset.csv
       hash: md5

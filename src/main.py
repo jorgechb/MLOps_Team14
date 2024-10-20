@@ -13,7 +13,6 @@ class Pipeline:
         
 
     def run(self):
-
         # Select which phase to execute
         if self.phase == 'explore':
             self.dataset.explore()
@@ -21,8 +20,8 @@ class Pipeline:
             self.logger.info("Executing split data phase...") 
             self.dataset.split_data()
         elif self.phase == 'transform': 
-            # self.dataset.transform()
             self.logger.info("Executing transform phase...") 
+            self.dataset.transform()
         elif self.phase == 'train': 
             self.logger.info("Executing train phase...") 
             # model = Model(logger)

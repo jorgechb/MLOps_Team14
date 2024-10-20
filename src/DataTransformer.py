@@ -13,21 +13,22 @@ from sklearn.preprocessing import OneHotEncoder
 
 class DataTransformer: 
     def __init__(self, logger):
+        self.config = get_config()
         self.logger = logger
+        self.transformed_csv = 'data/processed/transformed'
+        os.makedirs(self.transformed_csv, exist_ok=True)
+        self.plot_dir = 'reports/figures'
 
-    def transform_data(self):
+    def transform_data(self, xtrain, ytrain, xval, yval, xtest, ytest):
         self.logger.info("Iniciando las transformaciones de los datos...")
-        # Crea la carpeta de los archivos transformed si no existe
-        if(not os.path.exists(r'../data/processed/transformed')):
-            os.mkdir(r'../data/processed/transformed')
         
         # Leer los data frames separados después de la limpieza
-        xtrain = pd.read_csv('../data/processed/split/xtrain.csv')
-        xval = pd.read_csv('../data/processed/split/xval.csv')
-        xtest = pd.read_csv('../data/processed/split/xtest.csv')
-        ytrain = pd.read_csv('../data/processed/split/ytrain.csv')
-        yval = pd.read_csv('../data/processed/split/yval.csv')
-        ytest = pd.read_csv('../data/processed/split/ytest.csv')
+        xtrain = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xtrain.csv'))
+        xval = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xval.csv'))
+        xtest = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xtest.csv'))
+        ytrain = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'ytrain.csv'))
+        yval = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'yval.csv'))
+        ytest = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'ytest.csv'))
 
         # Separación de columnas por tipos de datos
         self.num_columns = xtrain.select_dtypes(include=np.number).columns
@@ -51,12 +52,13 @@ class DataTransformer:
         XtrainT, XvalT, XtestT = self.concat(XtrainNum, XvalNum, XtestNum, XtrainBin, XvalBin, XtestBin, XtrainCat, XvalCat, XtestCat)
 
         # Guardar archivos en la carpeta de Data para versionar
-        XtrainT.to_csv(r'../data/processed/transformed/xtrainT.csv')
-        XvalT.to_csv(r'../data/processed/transformed/xvalT.csv')
-        XtestT.to_csv(r'../data/processed/transformed/xtestT.csv')
-        ytrainT.to_csv(r'../data/processed/transformed/ytrainT.csv')
-        yvalT.to_csv(r'../data/processed/transformed/yvalT.csv')
-        ytestT.to_csv(r'../data/processed/transformed/ytestT.csv')
+        XtrainT.to_csv(os.path.join(self.transformed_csv, 'xtrainT.csv'), index=False)
+        XvalT.to_csv(os.path.join(self.transformed_csv, 'xvalT.csv'), index=False)
+        XtestT.to_csv(os.path.join(self.transformed_csv, 'xtestT.csv'), index=False)
+
+        ytrainT.to_csv(os.path.join(self.transformed_csv, 'ytrainT.csv'), index=False)
+        yvalT.to_csv(os.path.join(self.transformed_csv, 'yvalT.csv'), index=False)
+        ytestT.to_csv(os.path.join(self.transformed_csv, 'ytestT.csv'), index=False)
 
         return XtrainT, ytrainT, XvalT, yvalT, XtestT, ytestT
 
@@ -111,14 +113,19 @@ class DataTransformer:
                 fila += 1
                 columna = 0
         axs[fila, columna].axis('off')
-        plt.show()
+        plot_path = os.path.join(self.plot_dir, f'distribucion_numericas_t.png')
+        plt.savefig(plot_path)
+        plt.close()
+        self.logger.info(f"Gráfico guardado en {plot_path}")
         # Matriz de correlación
         correlacion_num = pd.concat([ytrain, xtrain],axis=1).corr(numeric_only = True)
         # Crear un mapa de calor
         plt.figure(figsize=(10, 10))
         sns.heatmap(correlacion_num, annot=True, fmt=".2f")
         plt.title("Mapa de calor de correlación")
-        plt.show()
+        plot_path = os.path.join(self.plot_dir, f'mapa_de_calor.png')
+        plt.savefig(plot_path)
+        plt.close()
 
     def num_clean(self, xtrain, xval, xtest):
         self.logger.info("Limpieza de variables numéricas...")
