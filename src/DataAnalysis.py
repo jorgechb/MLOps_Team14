@@ -8,7 +8,9 @@ class DataAnalysis:
     def __init__(self, logger):
         self.logger = logger
         self.plot_dir = 'reports/figures'
+        self.explore_csv = 'data/processed/explored'
         os.makedirs(self.plot_dir, exist_ok=True)
+        os.makedirs(self.explore_csv, exist_ok=True)
 
     def EDA(self, data):
         self.logger.info("Iniciando el análisis exploratorio de datos (EDA)...")
@@ -30,6 +32,11 @@ class DataAnalysis:
 
         # 6 Graficar distribuciones y resumen final
         self.plot_numeric_distributions(data_cleaned)
+
+        # Guardar el archivo csv para la sig fase
+        explore_path = os.path.join(self.explore_csv, 'explored_dataset.csv')
+        data.to_csv(explore_path, index=False)
+        print(f"Dataset limpio y explorado guardado en {explore_path}")
 
         return data_cleaned
 

@@ -10,14 +10,16 @@ class Pipeline:
         self.config = get_config()
         self.phase = phase
         self.dataset = Dataset(logger)
-        self.dataset.explore()
+        
 
     def run(self):
 
         # Select which phase to execute
-        if self.phase == 'split_data': 
-            # self.dataset.split_data()
+        if self.phase == 'explore':
+            self.dataset.explore()
+        elif self.phase == 'split_data': 
             self.logger.info("Executing split data phase...") 
+            self.dataset.split_data()
         elif self.phase == 'transform': 
             # self.dataset.transform()
             self.logger.info("Executing transform phase...") 
@@ -35,7 +37,6 @@ class Pipeline:
             # self.logger.info("Metrics on test set: ") 
             # model.evaluate(self.dataset.ytestT, predict_test)
         else: 
-            
             self.logger.info("Executing complete pipeline...") 
             # model = Model(logger)
             # model.train(self.dataset.xtrainT, self.dataset.ytrainT)
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--phase', type=str, help='Phase of the pipeline to be implemented', 
-                        default='all', choices=['split_data', 'transform', 'train', 'evaluate'])
+                        default='all', choices=['explore', 'split_data', 'transform', 'train', 'evaluate'])
     args = parser.parse_args()
     phase = args.phase
     

@@ -3,28 +3,69 @@ stages:
   split_data:
     cmd: python src/main.py -p split_data
     deps:
+    - path: data/processed/explored/explored_dataset.csv
+      hash: md5
+      md5: 8cd1a3aa5f612040ca4bd32772157989
+      size: 2835258
     - path: src/main.py
       hash: md5
-      md5: 2c7ea41fb24b414f30ba729cb3736cfa
-      size: 2697
+      md5: 32afadaa383d266a05c97ce41e7f9abc
+      size: 2709
+    outs:
+    - path: data/processed/split/xtest.csv
+      hash: md5
+      md5: 27cb9efbc189aea7209dfb59fbafb13f
+      size: 543018
+    - path: data/processed/split/xtrain.csv
+      hash: md5
+      md5: b2f967658b2977ecb095e73b7b30ea13
+      size: 1627681
+    - path: data/processed/split/xval.csv
+      hash: md5
+      md5: 8c926c4ab4c4ce57cbc7e7394f09f2ed
+      size: 542887
+    - path: data/processed/split/ytest.csv
+      hash: md5
+      md5: 619f69f40c9afc731b94a3973e4a1eb8
+      size: 24434
+    - path: data/processed/split/ytrain.csv
+      hash: md5
+      md5: e829cf2aac23c94063b172879282161f
+      size: 73288
+    - path: data/processed/split/yval.csv
+      hash: md5
+      md5: a474229227ba5d1f0546623622dd5797
+      size: 24434
   transform:
     cmd: python src/main.py -p transform
     deps:
     - path: src/main.py
       hash: md5
-      md5: 2c7ea41fb24b414f30ba729cb3736cfa
-      size: 2697
+      md5: 32afadaa383d266a05c97ce41e7f9abc
+      size: 2709
   train:
     cmd: python src/main.py -p train
     deps:
     - path: src/main.py
       hash: md5
-      md5: 2c7ea41fb24b414f30ba729cb3736cfa
-      size: 2697
+      md5: 32afadaa383d266a05c97ce41e7f9abc
+      size: 2709
   evaluate:
     cmd: python src/main.py -p evaluate
     deps:
     - path: src/main.py
       hash: md5
-      md5: 2c7ea41fb24b414f30ba729cb3736cfa
-      size: 2697
+      md5: 32afadaa383d266a05c97ce41e7f9abc
+      size: 2709
+  explore:
+    cmd: python src/main.py -p explore
+    deps:
+    - path: src/main.py
+      hash: md5
+      md5: 32afadaa383d266a05c97ce41e7f9abc
+      size: 2709
+    outs:
+    - path: data/processed/explored/explored_dataset.csv
+      hash: md5
+      md5: 8cd1a3aa5f612040ca4bd32772157989
+      size: 2835258

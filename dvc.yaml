@@ -1,8 +1,22 @@
 stages:
+  explore:
+    cmd: python src/main.py -p explore
+    deps:
+      - src/main.py
+    outs:
+      - data/processed/explored/explored_dataset.csv
   split_data:
     cmd: python src/main.py -p split_data
     deps:
       - src/main.py
+      - data/processed/explored/explored_dataset.csv
+    outs:
+      - data/processed/split/xtrain.csv
+      - data/processed/split/ytrain.csv
+      - data/processed/split/xval.csv
+      - data/processed/split/yval.csv
+      - data/processed/split/xtest.csv
+      - data/processed/split/ytest.csv
   transform:
     cmd: python src/main.py -p transform
     deps:
