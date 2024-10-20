@@ -16,7 +16,6 @@ class Pipeline:
 
         # Select which phase to execute
         if self.phase == 'split_data': 
-            self.dataset.explore()
             # self.dataset.split_data()
             self.logger.info("Executing split data phase...") 
         elif self.phase == 'transform': 
