@@ -15,6 +15,7 @@ class Pipeline:
     def run(self):
         # Select which phase to execute
         if self.phase == 'explore':
+            self.logger.info("Executing explore data phase...") 
             self.dataset.explore()
         elif self.phase == 'split_data': 
             self.logger.info("Executing split data phase...") 
