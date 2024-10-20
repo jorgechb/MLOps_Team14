@@ -1,44 +1,44 @@
 file_paths:
-  raw_dataset: 'data\raw\raw_dataset.csv'
-  processed_dataset: '..\processed\processed\'
-  log_path: '..\logs'
-  reports_path: '..\reports'
-  model_path: '..\models\model.joblib'
-  metrics_path: '..\models'
+  raw_dataset: "data/raw/raw_dataset.csv"
+  processed_dataset: "../processed/processed/"
+  log_path: "../logs"
+  reports_path: "../reports"
+  model_path: "../models/model.joblib"
+  metrics_path: "../models"
 
-data_split: 
-  train: 0.6 
-  test: 0.5 
+data_split:
+  train: 0.6
+  test: 0.5
 
-hyperparameters: 
-  n_estimators: 10 
-  max_depth: 8 
+hyperparameters:
+  n_estimators: 10
+  max_depth: 8
   min_samples_split: 2
-  min_samples_leaf: 1 
-  max_features: 'sqrt'
+  min_samples_leaf: 1
+  max_features: "sqrt"
   bootstrap: True
-  random_state: 42 
+  random_state: 42
 
-logger: 
+logger:
   version: 1
   disable_existing_loggers: false
-  formatters: 
-    simple: 
-      format: '%(asctime)s - %(levelname)s - %(message)s'
+  formatters:
+    simple:
+      format: "%(asctime)s - %(levelname)s - %(message)s"
   handlers:
-    stdout: 
+    stdout:
       class: logging.StreamHandler
       formatter: simple
       stream: ext://sys.stdout
-    file: 
+    file:
       class: logging.handlers.RotatingFileHandler
       formatter: simple
       filename: "../logs/log.log"
       maxBytes: 1000000
       backupCount: 3
-  loggers: 
+  loggers:
     root:
       level: INFO
-      handlers: 
-      - stdout
-      - file  
+      handlers:
+        - stdout
+        - file

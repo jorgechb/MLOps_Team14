@@ -1,30 +1,30 @@
 schema: '2.0'
 stages:
   split_data:
-    cmd: python src\main.py -p split_data
+    cmd: python src/main.py -p split_data
     deps:
     - path: src/main.py
       hash: md5
-      md5: 14b5f60908a66c35cbfafe7eb3c145ea
-      size: 2735
+      md5: 646b46f5aee3713336652f6f8dffa5aa
+      size: 2699
   transform:
-    cmd: python src\main.py -p transform
+    cmd: python src/main.py -p transform
     deps:
     - path: src/main.py
       hash: md5
-      md5: 14b5f60908a66c35cbfafe7eb3c145ea
-      size: 2735
+      md5: 646b46f5aee3713336652f6f8dffa5aa
+      size: 2699
   train:
-    cmd: python src\main.py -p train
+    cmd: python src/main.py -p train
     deps:
     - path: src/main.py
       hash: md5
-      md5: 14b5f60908a66c35cbfafe7eb3c145ea
-      size: 2735
+      md5: 646b46f5aee3713336652f6f8dffa5aa
+      size: 2699
   evaluate:
-    cmd: python src\main.py -p evaluate
+    cmd: python src/main.py -p evaluate
     deps:
     - path: src/main.py
       hash: md5
-      md5: 14b5f60908a66c35cbfafe7eb3c145ea
-      size: 2735
+      md5: 646b46f5aee3713336652f6f8dffa5aa
+      size: 2699
