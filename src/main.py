@@ -10,12 +10,13 @@ class Pipeline:
         self.config = get_config()
         self.phase = phase
         self.dataset = Dataset(logger)
-        # self.dataset.explore()
+        self.dataset.explore()
 
     def run(self):
 
         # Select which phase to execute
         if self.phase == 'split_data': 
+            self.dataset.explore()
             # self.dataset.split_data()
             self.logger.info("Executing split data phase...") 
         elif self.phase == 'transform': 
