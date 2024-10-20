@@ -14,7 +14,7 @@ class Model:
         self.config = get_config()
         self.hyperparameters = self.config['hyperparameters']
         self.model = RandomForestClassifier(**self.hyperparameters)
-        self.logger.info("Model successfully created") 
+        self.logger.info("Model successfully created")
 
     def train(self):
         # Load training data 
@@ -53,7 +53,7 @@ class Model:
         self.get_metrics(self.ytest, test_pred, 'Test')
 
         # Save metrics 
-        with open("models\metrics.json", 'w') as outfile: 
+        with open(os.path.join(self.config['file_paths']['metrics_path']), 'w') as outfile: 
             json.dump(self.metrics, outfile)
 
         self.logger.info(f"Metrics can be found in {self.config['file_paths']['metrics_path']}")
