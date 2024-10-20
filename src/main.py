@@ -4,6 +4,22 @@ from DataTransformer import DataTransformer
 from utilities import create_logger, get_config
 import argparse
 
+from urllib.parse import urlparse
+
+import mlflow
+import mlflow.sklearn
+import json
+import os
+
+mlflow.set_tracking_uri("http://127.0.0.1:5000/") 
+mlflow.set_experiment("Equipo13_MLOps")
+
+def load_metrics(file_path):
+    """Leer los archivos o resultados del JSON del test."""
+    with open(file_path, 'r') as file:
+        metrics = json.load(file)
+    return metrics
+
 class Pipeline: 
     def __init__(self, logger, phase: str):
         self.logger = logger
@@ -37,7 +53,24 @@ class Pipeline:
             self.model.train()
             self.model.evaluate()
 
-        self.teardown() 
+            metrics_path = "src/metrics.json"
+
+            if os.path.exists(metrics_path):
+                metrics = load_metrics(metrics_path)
+                tracking_url = mlflow.get_tracking_uri()
+
+                with mlflow.start_run():
+                     mlflow.log_params(self.config['hyperparameters'])
+
+                     mlflow.log_metric('accuracy', metrics['accuracy'])
+                     mlflow.log_metric('precision', metrics['precision'])
+                     mlflow.log_metric('recall', metrics['recall'])
+                     mlflow.log_metric('f1_score', metrics['fi_score'])
+            else:
+                self.logger.error(f"Metrics file not found at {metrics_path}") 
+            
+        self.teardown()
+        
 
     def teardown(self): 
         
