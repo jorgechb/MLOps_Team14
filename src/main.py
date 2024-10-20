@@ -10,7 +10,7 @@ class Pipeline:
         self.config = get_config()
         self.phase = phase
         self.dataset = Dataset(logger)
-        
+        self.model = Model(logger)
 
     def run(self):
         # Select which phase to execute
@@ -25,30 +25,18 @@ class Pipeline:
             self.dataset.transform()
         elif self.phase == 'train': 
             self.logger.info("Executing train phase...") 
-            # model = Model(logger)
-            # model.train(self.dataset.xtrainT, self.dataset.ytrainT)
+            self.model.train()
         elif self.phase == 'evaluate': 
             self.logger.info("Executing evaluate phase...") 
-            # predict_val = model.predict(self.dataset.xvalT)
-            # predict_test = model.predict(self.dataset.xtestT)
-
-            # self.logger.info("Metrics on validation set: ") 
-            # model.evaluate(self.dataset.yvalT, predict_val)
-            # self.logger.info("Metrics on test set: ") 
-            # model.evaluate(self.dataset.ytestT, predict_test)
+            self.model.evaluate()
         else: 
             self.logger.info("Executing complete pipeline...") 
-            # model = Model(logger)
-            # model.train(self.dataset.xtrainT, self.dataset.ytrainT)
-            # predict_val = model.predict(self.dataset.xvalT)
-            # predict_test = model.predict(self.dataset.xtestT)
+            self.dataset.explore()
+            self.dataset.split_data()
+            self.dataset.transform()
+            self.model.train()
+            self.model.evaluate()
 
-            # self.logger.info("Metrics on validation set: ") 
-            # model.evaluate(self.dataset.yvalT, predict_val)
-            # self.logger.info("Metrics on test set: ") 
-            # model.evaluate(self.dataset.ytestT, predict_test)
-            
-            # model.save_model()
         self.teardown() 
 
     def teardown(self): 

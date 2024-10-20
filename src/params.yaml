@@ -2,10 +2,11 @@ file_paths:
   raw_dataset: "data/raw/raw_dataset.csv"
   processed_explored_dataset: "data/processed/explored/explored_dataset.csv"
   split_dataset: "data/processed/split"
+  transfomed_path: "data/processed/transformed"
   log_path: "../logs"
   reports_path: "../reports"
-  model_path: "../models/model.joblib"
-  metrics_path: "../models"
+  model_path: "models/model.joblib"
+  metrics_path: "models/metrics.json"
 
 data_split:
   train: 0.6

@@ -35,7 +35,7 @@ class DataAnalysis:
 
         # Guardar el archivo csv para la sig fase
         explore_path = os.path.join(self.explore_csv, 'explored_dataset.csv')
-        data.to_csv(explore_path, index=False)
+        data_cleaned.to_csv(explore_path, index=False)
         print(f"Dataset limpio y explorado guardado en {explore_path}")
 
         return data_cleaned
