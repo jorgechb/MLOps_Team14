@@ -17,10 +17,11 @@ class DataTransformer:
 
     def transform_data(self):
         self.logger.info("Iniciando las transformaciones de los datos...")
-
+        # Crea la carpeta de los archivos transformed si no existe
         if(not os.path.exists(r'../data/processed/transformed')):
             os.mkdir(r'../data/processed/transformed')
         
+        # Leer los data frames separados después de la limpieza
         xtrain = pd.read_csv('../data/processed/split/xtrain.csv')
         xval = pd.read_csv('../data/processed/split/xval.csv')
         xtest = pd.read_csv('../data/processed/split/xtest.csv')
@@ -49,9 +50,10 @@ class DataTransformer:
         # 7 Concatenación de variables transformadas
         XtrainT, XvalT, XtestT = self.concat(XtrainNum, XvalNum, XtestNum, XtrainBin, XvalBin, XtestBin, XtrainCat, XvalCat, XtestCat)
 
-        XtrainT.to_csv(r'../data/processed/transformed/XtrainT.csv')
-        XvalT.to_csv(r'../data/processed/transformed/XvalT.csv')
-        XtestT.to_csv(r'../data/processed/transformed/XtestT.csv')
+        # Guardar archivos en la carpeta de Data para versionar
+        XtrainT.to_csv(r'../data/processed/transformed/xtrainT.csv')
+        XvalT.to_csv(r'../data/processed/transformed/xvalT.csv')
+        XtestT.to_csv(r'../data/processed/transformed/xtestT.csv')
         ytrainT.to_csv(r'../data/processed/transformed/ytrainT.csv')
         yvalT.to_csv(r'../data/processed/transformed/yvalT.csv')
         ytestT.to_csv(r'../data/processed/transformed/ytestT.csv')
