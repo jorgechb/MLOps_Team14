@@ -1,5 +1,6 @@
 import yaml
 import logging
+import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -14,8 +15,18 @@ class DataTransformer:
     def __init__(self, logger):
         self.logger = logger
 
-    def transform_data(self, xtrain, ytrain, xval, yval, xtest, ytest):
+    def transform_data(self):
         self.logger.info("Iniciando las transformaciones de los datos...")
+
+        if(not os.path.exists(r'../data/processed/transformed')):
+            os.mkdir(r'../data/processed/transformed')
+        
+        xtrain = pd.read_csv('../data/processed/split/xtrain.csv')
+        xval = pd.read_csv('../data/processed/split/xval.csv')
+        xtest = pd.read_csv('../data/processed/split/xtest.csv')
+        ytrain = pd.read_csv('../data/processed/split/ytrain.csv')
+        yval = pd.read_csv('../data/processed/split/yval.csv')
+        ytest = pd.read_csv('../data/processed/split/ytest.csv')
 
         # Separación de columnas por tipos de datos
         self.num_columns = xtrain.select_dtypes(include=np.number).columns
@@ -37,6 +48,13 @@ class DataTransformer:
         XtrainCat, XvalCat, XtestCat = self.cat_transform(xtrain, xval, xtest)
         # 7 Concatenación de variables transformadas
         XtrainT, XvalT, XtestT = self.concat(XtrainNum, XvalNum, XtestNum, XtrainBin, XvalBin, XtestBin, XtrainCat, XvalCat, XtestCat)
+
+        XtrainT.to_csv(r'../data/processed/transformed/XtrainT.csv')
+        XvalT.to_csv(r'../data/processed/transformed/XvalT.csv')
+        XtestT.to_csv(r'../data/processed/transformed/XtestT.csv')
+        ytrainT.to_csv(r'../data/processed/transformed/ytrainT.csv')
+        yvalT.to_csv(r'../data/processed/transformed/yvalT.csv')
+        ytestT.to_csv(r'../data/processed/transformed/ytestT.csv')
 
         return XtrainT, ytrainT, XvalT, yvalT, XtestT, ytestT
 
