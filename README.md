@@ -59,3 +59,4 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
     │
     └── utilities.py            <- Common utilities between scripts
 ```
+Setup and Running
