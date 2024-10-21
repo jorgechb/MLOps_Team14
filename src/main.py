@@ -49,7 +49,7 @@ class Pipeline:
             metrics_path = "models/metrics.json"
 
             if os.path.exists(metrics_path):
-                metrics = load_metrics(metrics_path)['Validation']
+                metrics = load_metrics(metrics_path)['Test']
                 #tracking_url = mlflow.get_tracking_uri()
                 print('En el if de metrics')
                 print(metrics['accuracy'])

@@ -12,8 +12,7 @@ class Dataset:
         self.logger = logger
         self.raw_df = pd.read_csv(self.config['file_paths']['raw_dataset'])
         self.explored_df = []
-        self.split_csv_dir = 'data/processed/split'
-        os.makedirs(self.split_csv_dir, exist_ok=True)
+        
         self.xtrain = []
         self.ytrain = []
         self.xval = [] 
@@ -48,12 +47,14 @@ class Dataset:
         self.logger.info(f'Validation -> {self.xval.shape}')
 
         # Guardar los split en csv
-        self.xtrain.to_csv(os.path.join(self.split_csv_dir, 'xtrain.csv'), index=False)
-        self.ytrain.to_csv(os.path.join(self.split_csv_dir, 'ytrain.csv'), index=False)
-        self.xval.to_csv(os.path.join(self.split_csv_dir, 'xval.csv'), index=False)
-        self.yval.to_csv(os.path.join(self.split_csv_dir, 'yval.csv'), index=False)
-        self.xtest.to_csv(os.path.join(self.split_csv_dir, 'xtest.csv'), index=False)
-        self.ytest.to_csv(os.path.join(self.split_csv_dir, 'ytest.csv'), index=False)
+        processed_split_dir = os.path.join('data', 'processed', 'split')
+        os.makedirs(processed_split_dir, exist_ok=True)
+        self.xtrain.to_csv(os.path.join(processed_split_dir, 'xtrain.csv'), index=False)
+        self.ytrain.to_csv(os.path.join(processed_split_dir, 'ytrain.csv'), index=False)
+        self.xval.to_csv(os.path.join(processed_split_dir, 'xval.csv'), index=False)
+        self.yval.to_csv(os.path.join(processed_split_dir, 'yval.csv'), index=False)
+        self.xtest.to_csv(os.path.join(processed_split_dir, 'xtest.csv'), index=False)
+        self.ytest.to_csv(os.path.join(processed_split_dir, 'ytest.csv'), index=False)
 
 
     

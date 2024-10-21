@@ -7,10 +7,6 @@ import os
 class DataAnalysis: 
     def __init__(self, logger):
         self.logger = logger
-        self.plot_dir = 'reports/figures'
-        self.explore_csv = 'data/processed/explored'
-        os.makedirs(self.plot_dir, exist_ok=True)
-        os.makedirs(self.explore_csv, exist_ok=True)
 
     def EDA(self, data):
         self.logger.info("Iniciando el análisis exploratorio de datos (EDA)...")
@@ -34,8 +30,9 @@ class DataAnalysis:
         self.plot_numeric_distributions(data_cleaned)
 
         # Guardar el archivo csv para la sig fase
-        explore_path = os.path.join(self.explore_csv, 'explored_dataset.csv')
-        data_cleaned.to_csv(explore_path, index=False)
+        explore_path = os.path.join('data', 'processed', 'explored')
+        os.makedirs(explore_path, exist_ok=True)
+        data_cleaned.to_csv(os.path.join(explore_path, 'explored_dataset.csv'), index=False)
         print(f"Dataset limpio y explorado guardado en {explore_path}")
 
         return data_cleaned
@@ -85,8 +82,9 @@ class DataAnalysis:
         plt.xlabel('Clase')
         plt.ylabel('Frecuencia')
         plt.xticks(rotation=0)
-        plot_path = os.path.join(self.plot_dir, f'{target_col}_distribution.png')
-        plt.savefig(plot_path)
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'{target_col}_distribution.png'))
         plt.close()
         self.logger.info(f"Gráfico guardado en {plot_path}")
 
@@ -126,8 +124,10 @@ class DataAnalysis:
             plt.boxplot(data[col])
             plt.title(f'Box Plot de {col}')
             plt.ylabel('Valores')
-        plot_path = os.path.join(self.plot_dir, f'boxplot_col_numericas.png')
-        plt.savefig(plot_path)
+        
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'boxplot_col_numericas.png'))
         plt.close()
         self.logger.info(f"Boxplot guardado en {plot_path}")
     
@@ -143,7 +143,8 @@ class DataAnalysis:
             plt.title(f'Distribución de {col}')
             plt.xlabel(col)
             plt.ylabel('Frecuencia')
-        plot_path = os.path.join(self.plot_dir, f'distribucion_col_numericas.png')
-        plt.savefig(plot_path)
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'distribucion_col_numericas.png'))
         plt.close()
         self.logger.info(f"Gráfico guardado en {plot_path}")

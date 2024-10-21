@@ -15,9 +15,6 @@ class DataTransformer:
     def __init__(self, logger):
         self.config = get_config()
         self.logger = logger
-        self.transformed_csv = 'data/processed/transformed'
-        os.makedirs(self.transformed_csv, exist_ok=True)
-        self.plot_dir = 'reports/figures'
 
     def transform_data(self, xtrain, ytrain, xval, yval, xtest, ytest):
         self.logger.info("Iniciando las transformaciones de los datos...")
@@ -52,13 +49,16 @@ class DataTransformer:
         XtrainT, XvalT, XtestT = self.concat(XtrainNum, XvalNum, XtestNum, XtrainBin, XvalBin, XtestBin, XtrainCat, XvalCat, XtestCat)
 
         # Guardar archivos en la carpeta de Data para versionar
-        XtrainT.to_csv(os.path.join(self.transformed_csv, 'xtrainT.csv'), index=False)
-        XvalT.to_csv(os.path.join(self.transformed_csv, 'xvalT.csv'), index=False)
-        XtestT.to_csv(os.path.join(self.transformed_csv, 'xtestT.csv'), index=False)
+        transformed_path = os.path.join('data', 'processed', 'transformed')
+        os.makedirs(transformed_path, exist_ok=True)
 
-        ytrainT.to_csv(os.path.join(self.transformed_csv, 'ytrainT.csv'), index=False)
-        yvalT.to_csv(os.path.join(self.transformed_csv, 'yvalT.csv'), index=False)
-        ytestT.to_csv(os.path.join(self.transformed_csv, 'ytestT.csv'), index=False)
+        XtrainT.to_csv(os.path.join(transformed_path, 'xtrainT.csv'), index=False)
+        XvalT.to_csv(os.path.join(transformed_path, 'xvalT.csv'), index=False)
+        XtestT.to_csv(os.path.join(transformed_path, 'xtestT.csv'), index=False)
+
+        ytrainT.to_csv(os.path.join(transformed_path, 'ytrainT.csv'), index=False)
+        yvalT.to_csv(os.path.join(transformed_path, 'yvalT.csv'), index=False)
+        ytestT.to_csv(os.path.join(transformed_path, 'ytestT.csv'), index=False)
 
         return XtrainT, ytrainT, XvalT, yvalT, XtestT, ytestT
 
@@ -113,8 +113,10 @@ class DataTransformer:
                 fila += 1
                 columna = 0
         axs[fila, columna].axis('off')
-        plot_path = os.path.join(self.plot_dir, f'distribucion_numericas_t.png')
-        plt.savefig(plot_path)
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'distribucion_numericas_t.png'))
+
         plt.close()
         self.logger.info(f"Gráfico guardado en {plot_path}")
         # Matriz de correlación
@@ -123,8 +125,10 @@ class DataTransformer:
         plt.figure(figsize=(10, 10))
         sns.heatmap(correlacion_num, annot=True, fmt=".2f")
         plt.title("Mapa de calor de correlación")
-        plot_path = os.path.join(self.plot_dir, f'mapa_de_calor.png')
-        plt.savefig(plot_path)
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'mapa_de_calor.png'))
+
         plt.close()
 
     def num_clean(self, xtrain, xval, xtest):
