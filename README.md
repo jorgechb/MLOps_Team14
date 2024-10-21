@@ -78,7 +78,10 @@ from sklearn.metrics import (accuracy_score, precision_score,
 
 # 3. Preprocesamiento de datos: Escalado y codificación de variables.
 # 4. Entrenamiento del modelo: Uso de RandomForestClassifier.
+
 # 5. Evaluación del modelo: Utilización de métricas como accuracy, precision, recall, entre otras.
 
 # 6. ML FLOW
+mlflow server --host 127.0.0.1 --port 5000
+
 # 7. Visualización de Resultados y Gestión del Registro de Modelos
