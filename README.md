@@ -59,6 +59,20 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
     │
     └── utilities.py            <- Common utilities between scripts
 ```
+
+# Instrucciones de ejecución:
+En la carpeta principal MLOPS_TEAM14:
+
+Dvc pull
+
+Se deberá ejecutar mlflow con el siguiente comando:
+
+mlflow server –host 127.0.0.1 –port 5000
+
+ejecutar en la carpeta principal MLOPS_TEAM14:
+
+dvc repro
+
 # 1. Setup and Running
 DVC (pip install dvc)
 
