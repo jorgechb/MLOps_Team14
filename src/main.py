@@ -6,10 +6,13 @@ import argparse
 
 from urllib.parse import urlparse
 
+import joblib
 import mlflow
 import mlflow.sklearn
+from mlflow.models import infer_signature
 import json
 import os
+import pandas as pd 
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000/") 
 mlflow.set_experiment("Equipo14_MLOps")
@@ -46,23 +49,47 @@ class Pipeline:
             self.logger.info("Executing evaluate phase...") 
             self.model.evaluate()
 
-            metrics_path = "models/metrics.json"
+            current_dir = os.getcwd()
 
-            if os.path.exists(metrics_path):
-                metrics = load_metrics(metrics_path)['Test']
-                #tracking_url = mlflow.get_tracking_uri()
-                print('En el if de metrics')
-                print(metrics['accuracy'])
-                with mlflow.start_run():
-                     self.logger.info("ML_Flow...") 
-                     mlflow.log_params(self.config['hyperparameters'])
+            metrics_path = os.path.join(current_dir, "models", "metrics.json")
+            model_path = os.path.join(current_dir, "models", "model.joblib")
 
-                     mlflow.log_metric('accuracy', metrics['accuracy'])
-                     mlflow.log_metric('precision', metrics['precision'])
-                     mlflow.log_metric('recall', metrics['recall'])
-                     mlflow.log_metric('f1_score', metrics['f1_score'])
+            example_input = pd.read_csv(os.path.join(self.config['file_paths']['transfomed_path'], 'xtrainT.csv')).tail(1)
+            example_input.fillna(0, inplace=True)  # Fill missing values
+
+            if os.path.exists(metrics_path) and os.path.exists(model_path):
+
+                metrics = load_metrics(metrics_path)
+                tracking_url = mlflow.get_tracking_uri()
+
+                with mlflow.start_run() as run:
+
+                    mlflow.log_params(self.config['hyperparameters'])
+
+                    # Registra las métricas de Validación
+                    mlflow.log_metric('val_accuracy', metrics['Validation']['accuracy'])
+                    mlflow.log_metric('val_precision', metrics['Validation']['precision'])
+                    mlflow.log_metric('val_recall', metrics['Validation']['recall'])
+                    mlflow.log_metric('val_f1_score', metrics['Validation']['f1_score'])
+
+                    # Registra las métricas de Test
+                    mlflow.log_metric('test_accuracy', metrics['Test']['accuracy'])
+                    mlflow.log_metric('test_precision', metrics['Test']['precision'])
+                    mlflow.log_metric('test_recall', metrics['Test']['recall'])
+                    mlflow.log_metric('test_f1_score', metrics['Test']['f1_score'])
+
+                    model = joblib.load(model_path)
+                    signature = infer_signature(example_input, model.predict(example_input))
+
+                    mlflow.sklearn.log_model(model, "model", signature=signature, input_example=example_input)
+            
             else:
-                self.logger.error(f"Metrics file not found at {metrics_path}") 
+                if not os.path.exists(metrics_path):
+                    self.logger.error(f"Metrics file not found at {metrics_path}")
+                
+                if not os.path.exists(model_path):
+                    self.logger.error(f"Model file not found at {model_path}")    
+
         else: 
             self.logger.info("Executing complete pipeline...") 
             self.dataset.explore()
@@ -71,23 +98,47 @@ class Pipeline:
             self.model.train()
             self.model.evaluate()
 
-            metrics_path = "models/metrics.json"
+            current_dir = os.getcwd()
 
-            if os.path.exists(metrics_path):
+            metrics_path = os.path.join(current_dir, "models", "metrics.json")
+            model_path = os.path.join(current_dir, "models", "model.joblib")
+
+            example_input = pd.read_csv(os.path.join(self.config['file_paths']['transfomed_path'], 'xtrainT.csv')).tail(1)
+            example_input.fillna(0, inplace=True)  # Fill missing values
+
+            if os.path.exists(metrics_path) and os.path.exists(model_path):
+
                 metrics = load_metrics(metrics_path)
-                #tracking_url = mlflow.get_tracking_uri()
+                tracking_url = mlflow.get_tracking_uri()
 
-                with mlflow.start_run():
-                     self.logger.info("ML_Flow...") 
-                     mlflow.log_params(self.config['hyperparameters'])
+                with mlflow.start_run() as run:
 
-                     mlflow.log_metric('accuracy', metrics['accuracy'])
-                     mlflow.log_metric('precision', metrics['precision'])
-                     mlflow.log_metric('recall', metrics['recall'])
-                     mlflow.log_metric('f1_score', metrics['fi_score'])
-            else:
-                self.logger.error(f"Metrics file not found at {metrics_path}") 
+                    mlflow.log_params(self.config['hyperparameters'])
+
+                    # Registra las métricas de Validación
+                    mlflow.log_metric('val_accuracy', metrics['Validation']['accuracy'])
+                    mlflow.log_metric('val_precision', metrics['Validation']['precision'])
+                    mlflow.log_metric('val_recall', metrics['Validation']['recall'])
+                    mlflow.log_metric('val_f1_score', metrics['Validation']['f1_score'])
+
+                    # Registra las métricas de Test
+                    mlflow.log_metric('test_accuracy', metrics['Test']['accuracy'])
+                    mlflow.log_metric('test_precision', metrics['Test']['precision'])
+                    mlflow.log_metric('test_recall', metrics['Test']['recall'])
+                    mlflow.log_metric('test_f1_score', metrics['Test']['f1_score'])
+
+                    model = joblib.load(model_path)
+                    signature = infer_signature(example_input, model.predict(example_input))
+
+                    mlflow.sklearn.log_model(model, "model", signature=signature, input_example=example_input)
             
+            else:
+                if not os.path.exists(metrics_path):
+                    self.logger.error(f"Metrics file not found at {metrics_path}")
+                
+                if not os.path.exists(model_path):
+                    self.logger.error(f"Model file not found at {model_path}")
+
         self.teardown()
         
 
