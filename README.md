@@ -73,6 +73,31 @@ ejecutar en la carpeta principal MLOPS_TEAM14:
 
 dvc repro
 
++---------+  
+  | explore |  
+  +---------+  
+       *       
+       *       
+       *       
++------------+ 
+| split_data | 
++------------+ 
+       *       
+       *       
+       *       
++-----------+  
+| transform |  
++-----------+  
+       *       
+       *       
+       *       
+  +-------+    
+  | train |    
+  +-------+    
++----------+ 
+| evaluate | 
++----------+
+
 # 1. Setup and Running
 DVC (pip install dvc)
 
