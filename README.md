@@ -61,18 +61,30 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
 ```
 # 1. Setup and Running
 DVC (pip install dvc)
+
 pip install numpy pandas seaborn plotly scikit-learn matplotlib
+
 Importar librerías
+
 import numpy as np
+
 import pandas as pd
+
 import seaborn as sns
+
 import plotly.express as px
+
 import matplotlib.pyplot as plt
 
+
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler, PowerTransformer
+
 from sklearn.ensemble import RandomForestClassifier
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import (accuracy_score, precision_score, 
+
                              recall_score, f1_score, confusion_matrix, classification_report)
 
 # 3. Preprocesamiento de datos: Escalado y codificación de variables.
