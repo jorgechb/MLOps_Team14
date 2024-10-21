@@ -60,7 +60,7 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
     └── utilities.py            <- Common utilities between scripts
 ```
 # Pip Install Reequirements
-DVC (pip install dvc)
+pip install -r requirements.txt
 
 # 2. Setup and Running
 
@@ -77,6 +77,7 @@ ejecutar en la carpeta principal MLOPS_TEAM14:
 
 dvc repro
 
+# dvc dag
 +---------+  
   | explore |  
   +---------+  
