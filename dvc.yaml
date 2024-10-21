@@ -1,0 +1,50 @@
+stages:
+  explore:
+    cmd: python src/main.py -p explore
+    deps:
+      - src/main.py
+    outs:
+      - data/processed/explored/explored_dataset.csv
+  split_data:
+    cmd: python src/main.py -p split_data
+    deps:
+      - src/main.py
+      - data/processed/explored/explored_dataset.csv
+    outs:
+      - data/processed/split/xtrain.csv
+      - data/processed/split/ytrain.csv
+      - data/processed/split/xval.csv
+      - data/processed/split/yval.csv
+      - data/processed/split/xtest.csv
+      - data/processed/split/ytest.csv
+  transform:
+    cmd: python src/main.py -p transform
+    deps:
+      - src/main.py
+      - data/processed/split/xtrain.csv
+      - data/processed/split/ytrain.csv
+      - data/processed/split/xval.csv
+      - data/processed/split/yval.csv
+      - data/processed/split/xtest.csv
+      - data/processed/split/ytest.csv
+    outs:
+      - data/processed/transformed/xtrainT.csv
+      - data/processed/transformed/ytrainT.csv
+      - data/processed/transformed/xvalT.csv
+      - data/processed/transformed/yvalT.csv
+      - data/processed/transformed/xtestT.csv
+      - data/processed/transformed/ytestT.csv
+  train:
+    cmd: python src/main.py -p train
+    deps:
+      - src/main.py
+      - data/processed/transformed/xtrainT.csv
+      - data/processed/transformed/ytrainT.csv
+  evaluate:
+    cmd: python src/main.py -p evaluate
+    deps:
+      - src/main.py
+      - models/model.joblib
+    outs:
+      - models/metrics.json
+

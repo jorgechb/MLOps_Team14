@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 class DataAnalysis: 
     def __init__(self, logger):
@@ -28,6 +29,12 @@ class DataAnalysis:
         # 6 Graficar distribuciones y resumen final
         self.plot_numeric_distributions(data_cleaned)
 
+        # Guardar el archivo csv para la sig fase
+        explore_path = os.path.join('data', 'processed', 'explored')
+        os.makedirs(explore_path, exist_ok=True)
+        data_cleaned.to_csv(os.path.join(explore_path, 'explored_dataset.csv'), index=False)
+        print(f"Dataset limpio y explorado guardado en {explore_path}")
+
         return data_cleaned
 
     def describe_data(self, data):
@@ -42,7 +49,7 @@ class DataAnalysis:
         print(data.isnull().sum() / len(data) * 100)
 
     def handle_missing_data(self, data):
-        #elimina valores con mas de 20% null NAN
+        # Elimina valores con mas de 20% null NAN
         self.logger.info("Eliminando columnas con más del 20 por ciento de valores nulos...")
         null_percentage = data.isnull().sum() / len(data) * 100
         columns_to_drop = null_percentage[null_percentage > 20].index.tolist()
@@ -75,9 +82,13 @@ class DataAnalysis:
         plt.xlabel('Clase')
         plt.ylabel('Frecuencia')
         plt.xticks(rotation=0)
-        plt.show()
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'{target_col}_distribution.png'))
+        plt.close()
+        self.logger.info(f"Gráfico guardado en {plot_path}")
 
-    #manejo outliers 
+    # manejo outliers 
 
     def handle_outliers(self, data):
         #Eliminar valores atípicos y graficar boxplots
@@ -103,9 +114,9 @@ class DataAnalysis:
 
         return data_v2
     
-    # analisis varaibles numericas despues de outliers
+    # Analisis varaibles numericas despues de outliers
     def plot_boxplots(self, data, columns):
-        #Graficar boxplots para las columnas numéricas
+        # Graficar boxplots para las columnas numéricas
         self.logger.info("Graficando boxplots para las columnas numéricas...")
         plt.figure(figsize=(12, 6))
         for i, col in enumerate(columns, 1):
@@ -113,7 +124,12 @@ class DataAnalysis:
             plt.boxplot(data[col])
             plt.title(f'Box Plot de {col}')
             plt.ylabel('Valores')
-        plt.show()
+        
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'boxplot_col_numericas.png'))
+        plt.close()
+        self.logger.info(f"Boxplot guardado en {plot_path}")
     
 
     def plot_numeric_distributions(self, data):
@@ -127,4 +143,8 @@ class DataAnalysis:
             plt.title(f'Distribución de {col}')
             plt.xlabel(col)
             plt.ylabel('Frecuencia')
-        plt.show()
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'distribucion_col_numericas.png'))
+        plt.close()
+        self.logger.info(f"Gráfico guardado en {plot_path}")

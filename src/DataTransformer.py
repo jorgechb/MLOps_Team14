@@ -1,5 +1,6 @@
 import yaml
 import logging
+import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -12,10 +13,19 @@ from sklearn.preprocessing import OneHotEncoder
 
 class DataTransformer: 
     def __init__(self, logger):
+        self.config = get_config()
         self.logger = logger
 
     def transform_data(self, xtrain, ytrain, xval, yval, xtest, ytest):
         self.logger.info("Iniciando las transformaciones de los datos...")
+        
+        # Leer los data frames separados después de la limpieza
+        xtrain = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xtrain.csv'))
+        xval = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xval.csv'))
+        xtest = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'xtest.csv'))
+        ytrain = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'ytrain.csv'))
+        yval = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'yval.csv'))
+        ytest = pd.read_csv(os.path.join(self.config['file_paths']['split_dataset'], 'ytest.csv'))
 
         # Separación de columnas por tipos de datos
         self.num_columns = xtrain.select_dtypes(include=np.number).columns
@@ -37,6 +47,18 @@ class DataTransformer:
         XtrainCat, XvalCat, XtestCat = self.cat_transform(xtrain, xval, xtest)
         # 7 Concatenación de variables transformadas
         XtrainT, XvalT, XtestT = self.concat(XtrainNum, XvalNum, XtestNum, XtrainBin, XvalBin, XtestBin, XtrainCat, XvalCat, XtestCat)
+
+        # Guardar archivos en la carpeta de Data para versionar
+        transformed_path = os.path.join('data', 'processed', 'transformed')
+        os.makedirs(transformed_path, exist_ok=True)
+
+        XtrainT.to_csv(os.path.join(transformed_path, 'xtrainT.csv'), index=False)
+        XvalT.to_csv(os.path.join(transformed_path, 'xvalT.csv'), index=False)
+        XtestT.to_csv(os.path.join(transformed_path, 'xtestT.csv'), index=False)
+
+        ytrainT.to_csv(os.path.join(transformed_path, 'ytrainT.csv'), index=False)
+        yvalT.to_csv(os.path.join(transformed_path, 'yvalT.csv'), index=False)
+        ytestT.to_csv(os.path.join(transformed_path, 'ytestT.csv'), index=False)
 
         return XtrainT, ytrainT, XvalT, yvalT, XtestT, ytestT
 
@@ -91,14 +113,23 @@ class DataTransformer:
                 fila += 1
                 columna = 0
         axs[fila, columna].axis('off')
-        plt.show()
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'distribucion_numericas_t.png'))
+
+        plt.close()
+        self.logger.info(f"Gráfico guardado en {plot_path}")
         # Matriz de correlación
         correlacion_num = pd.concat([ytrain, xtrain],axis=1).corr(numeric_only = True)
         # Crear un mapa de calor
         plt.figure(figsize=(10, 10))
         sns.heatmap(correlacion_num, annot=True, fmt=".2f")
         plt.title("Mapa de calor de correlación")
-        plt.show()
+        plot_path = os.path.join('reports', 'figures')
+        os.makedirs(plot_path, exist_ok=True)
+        plt.savefig(os.path.join(plot_path, f'mapa_de_calor.png'))
+
+        plt.close()
 
     def num_clean(self, xtrain, xval, xtest):
         self.logger.info("Limpieza de variables numéricas...")
