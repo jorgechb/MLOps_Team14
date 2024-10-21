@@ -63,7 +63,6 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
 pip install -r requirements.txt
 
 # 2. Setup and Running
-Instrucciones de ejecución:
 
 En la carpeta principal MLOPS_TEAM14:
 
@@ -86,6 +85,7 @@ dvc repro
        *       
 +------------+ 
 | split_data | 
+
 +------------+ 
        *       
        *       
