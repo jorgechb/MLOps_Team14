@@ -63,7 +63,6 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
 DVC (pip install dvc)
 pip install numpy pandas seaborn plotly scikit-learn matplotlib
 Importar librerías
-Importación de librerías
 import numpy as np
 import pandas as pd
 import seaborn as sns
