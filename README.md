@@ -55,39 +55,44 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
     │
     ├── Model.py                <- ML algorithm wrapper
     |
+    ├── main.py                 <- Pipeline script
+    |
     ├── DataLoader.py           <- Fetch raw data
+    │
+    ├── TestSuite.py            <- Project Tests
     │
     └── utilities.py            <- Common utilities between scripts
 ```
-# 1. Pip Install Requirements
+## 1. Instalar Requerimientos
+```
 pip install -r requirements.txt
-
-# 2. Setup and Running
+```
+## 2. Ejecucion
 
 En la carpeta principal MLOPS_TEAM14:
-
-Dvc pull
-
+```
+dvc pull
+```
 Se deberá ejecutar mlflow con el siguiente comando:
-
+```
 mlflow server –host 127.0.0.1 –port 5000
-
-ejecutar en la carpeta principal MLOPS_TEAM14:
-
+```
+Ejecutar en la carpeta principal MLOPS_TEAM14:
+```
 dvc repro
-
-# dvc dag
+```
+# Project Direct Acyclic Graph (DAG)
 +---------+  
-  | explore |  
-  +---------+  
+| explore |  
++---------+  
        *       
        *       
        *       
 +------------+ 
-
+\
 | split_data | 
-
-+------------+ 
+\
++------------+ \
        *       
        *       
        *       
@@ -99,10 +104,13 @@ dvc repro
        *       
   +-------+    
   | train |    
-  +-------+    
+  +-------+ \
+       *       
+       *       
+       *       
 +----------+ 
-
+\
 | evaluate | 
-
+\
 +----------+
 
