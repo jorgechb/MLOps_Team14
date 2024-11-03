@@ -67,7 +67,8 @@ Este proyecto implementa técnicas de gobernanza para asegurar calidad, segurida
 
 Documentación precisa del proyecto y modelo: 
 
-- Establecemos directrices para la creación, entrenamiento y despliegue de modelos, asegurando precisión y transparencia en los resultados.
+- Dentro de nuestro repositorio registramos la información esencial del proyecto, así como el propósito, características y puntos esenciales de como se fue realizando. Para poder alinear con las políticas de la empresa.
+- Establecemos el despliegue de modelos, para la precisión y transparencia en los resultados.
 - Este proceso incluye validaciones y revisiones que mitigan riesgos de sesgo y optimizan el rendimiento del modelo.
 
 2. Estándares de Código
