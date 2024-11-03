@@ -64,9 +64,11 @@ Este proyecto implementa técnicas de gobernanza para asegurar calidad, segurida
 
 ## Políticas de Gobernanza
 1. Model Governance
+
 Documentación precisa del proyecto y modelo: 
-Establecemos directrices para la creación, entrenamiento y despliegue de modelos, asegurando precisión y transparencia en los resultados.
-Este proceso incluye validaciones y revisiones que mitigan riesgos de sesgo y optimizan el rendimiento del modelo.
+
+- Establecemos directrices para la creación, entrenamiento y despliegue de modelos, asegurando precisión y transparencia en los resultados.
+- Este proceso incluye validaciones y revisiones que mitigan riesgos de sesgo y optimizan el rendimiento del modelo.
 
 2. Estándares de Código
 
