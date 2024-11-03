@@ -26,6 +26,7 @@ class Model:
 
         # Save Model
         self.save_model()
+        return self.model
 
     def predict(self, x):
         return self.model.predict(x)

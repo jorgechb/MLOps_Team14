@@ -34,6 +34,7 @@ class DataAnalysis:
         os.makedirs(explore_path, exist_ok=True)
         data_cleaned.to_csv(os.path.join(explore_path, 'explored_dataset.csv'), index=False)
         print(f"Dataset limpio y explorado guardado en {explore_path}")
+        print('Shape:', data_cleaned.shape)
 
         return data_cleaned
 
