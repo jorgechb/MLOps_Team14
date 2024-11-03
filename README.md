@@ -85,6 +85,9 @@ Documentación de Gobernanza
 ## Las políticas y procedimientos de gobernanza implementados ayudan a asegurar:
 
 Calidad: Con procedimientos de revisión y pruebas que mantienen altos estándares en el proyecto.
+
 Seguridad: Con controles de protección de datos y control de accesos que protegen la integridad del proyecto.
+
 Cumplimiento: Garantizando conformidad con regulaciones legales y normativas éticas.
+
 Estas políticas consolidan un marco de gobernanza robusto, contribuyendo al desarrollo responsable del proyecto.
