@@ -23,7 +23,7 @@ class Dataset:
     def explore(self): 
         analyzer = DataAnalysis(logger=self.logger)
         self.raw_df = analyzer.EDA(self.raw_df)
-
+    
     def split_data(self):
         self.logger.info("Splitting data...")
         self.explored_df = pd.read_csv(self.config['file_paths']['processed_explored_dataset']) 
@@ -55,12 +55,12 @@ class Dataset:
         self.yval.to_csv(os.path.join(processed_split_dir, 'yval.csv'), index=False)
         self.xtest.to_csv(os.path.join(processed_split_dir, 'xtest.csv'), index=False)
         self.ytest.to_csv(os.path.join(processed_split_dir, 'ytest.csv'), index=False)
-
-
+        return xtrain, yval
     
     def transform(self):
         transformer = DataTransformer(logger=self.logger)
         self.xtrainT, self.ytrainT, self.xvalT, self.yvalT, self.xtestT, self.ytestT = transformer.transform_data(self.xtrain, self.ytrain, self.xval, self.yval, self.xtest, self.ytest) 
+        return self.xtrainT, self.yvalT
         
      
 if __name__ == "__main__": 
