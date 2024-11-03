@@ -59,3 +59,29 @@ Este proyecto de clasificación de hongos como venenosos o no venenosos utiliza 
     │
     └── utilities.py            <- Common utilities between scripts
 ```
+# # Gobernanza del Proyecto
+Este proyecto implementa técnicas de gobernanza para asegurar calidad, seguridad, y cumplimiento con estándares éticos y legales par el problema principal.
+
+## Políticas de Gobernanza
+1. Model Governance
+Documentación precisa del proyecto y modelo: 
+Establecemos directrices para la creación, entrenamiento y despliegue de modelos, asegurando precisión y transparencia en los resultados.
+Este proceso incluye validaciones y revisiones que mitigan riesgos de sesgo y optimizan el rendimiento del modelo.
+
+2. Estándares de Código
+
+- Para mejorar la mantenibilidad y colaboración, el código sigue estándares de estilo, convenciones de nombres y patrones de diseño que facilitan su comprensión y prevención de errores.
+Verificaciones Éticas y de Riesgo
+
+- El proyecto incluye evaluaciones de impacto ético y de riesgo, implementando medidas para reducir riesgos asociados, tanto en la privacidad de datos como en el potencial de sesgos en los modelos.
+Cumplimiento Legal
+
+- Se documentan procedimientos para asegurar el cumplimiento de normativas locales e internacionales aplicables, con especial énfasis en la privacidad de datos.
+Documentación de Gobernanza
+
+## Las políticas y procedimientos de gobernanza implementados ayudan a asegurar:
+
+Calidad: Con procedimientos de revisión y pruebas que mantienen altos estándares en el proyecto.
+Seguridad: Con controles de protección de datos y control de accesos que protegen la integridad del proyecto.
+Cumplimiento: Garantizando conformidad con regulaciones legales y normativas éticas.
+Estas políticas consolidan un marco de gobernanza robusto, contribuyendo al desarrollo responsable del proyecto.
