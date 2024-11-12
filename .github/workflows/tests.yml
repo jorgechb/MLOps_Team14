@@ -23,5 +23,13 @@ jobs:
         pip install -r requirements.txt
     - name: Downloading dataset 
       run: |
-        dvc pull
+        python DataLoader.py 
+    - name: Performing tests
+      run: |
+        python src/test_explore.py 
+
+
+        
+
+
 
