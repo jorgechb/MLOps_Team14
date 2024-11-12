@@ -24,9 +24,9 @@ jobs:
     - name: Downloading dataset 
       run: |
         python src/DataLoader.py
-    - name: Running pipeline
+    - name: Create log folder
       run: |
-        dvc repro 
+        mkdir logs
     - name: Performing tests
       run: |
         python src/test_explore.py 
