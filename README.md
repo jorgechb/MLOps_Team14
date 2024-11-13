@@ -81,6 +81,16 @@ Ejecutar en la carpeta principal MLOPS_TEAM14:
 ```
 dvc repro
 ```
+## 3. Implementacion de Dockers y API
+Inicializar Docker
+```
+docker build -t ml-api .
+docker run -p 8000:8000 ml-api
+```
+Mandar datos ejemplo usando fastapi
+```
+curl -Method Post -Uri "http://localhost:8000/predict" -Headers @{ "Content-Type" = "application/json" } -Body '{"features":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}'      
+```
 # Project Direct Acyclic Graph (DAG)
 +---------+  
 | explore |  
