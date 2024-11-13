@@ -1,0 +1,40 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "cap-diameter",
+      "stem-height",
+      "does-bruise-or-bleed",
+      "has-ring",
+      "cap-color_e",
+      "cap-color_g",
+      "cap-color_k",
+      "cap-color_l",
+      "cap-color_n",
+      "cap-color_o",
+      "cap-color_p",
+      "cap-color_r",
+      "cap-color_u",
+      "cap-color_w",
+      "cap-color_y"
+    ],
+    "data": [
+      [
+        -1.9900014894201352,
+        -1.0727131264261092,
+        0,
+        0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  }
+}

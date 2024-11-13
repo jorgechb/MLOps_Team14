@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/495162805918376711/ececb4df707c45398b00c4839c49aa75/artifacts
+end_time: 1731388759215
+entry_point_name: ''
+experiment_id: '495162805918376711'
+lifecycle_stage: active
+run_id: ececb4df707c45398b00c4839c49aa75
+run_name: adorable-stork-156
+run_uuid: ececb4df707c45398b00c4839c49aa75
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731388753376
+status: 3
+tags: []
+user_id: Jose Manuel Garcia

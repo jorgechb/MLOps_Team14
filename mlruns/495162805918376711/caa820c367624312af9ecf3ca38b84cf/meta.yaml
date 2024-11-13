@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/495162805918376711/caa820c367624312af9ecf3ca38b84cf/artifacts
+end_time: 1731388293525
+entry_point_name: ''
+experiment_id: '495162805918376711'
+lifecycle_stage: active
+run_id: caa820c367624312af9ecf3ca38b84cf
+run_name: nimble-trout-273
+run_uuid: caa820c367624312af9ecf3ca38b84cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731388287441
+status: 3
+tags: []
+user_id: Jose Manuel Garcia

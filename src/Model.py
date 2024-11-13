@@ -3,6 +3,7 @@ import logging
 import pandas as pd
 import joblib
 import json  
+import pickle
 from utilities import create_logger, get_config
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
@@ -76,9 +77,30 @@ class Model:
     def save_model(self):
         try: 
             joblib.dump(self.model, self.config['file_paths']['model_path'])
-            self.logger.info("Model saved successfully") 
+            self.logger.info("Model saved successfully")
+
         except: 
             self.logger.error("Unable to save the model")
+
+    def save_model_pickle(self):
+        try:
+            # Asegurarse de que el archivo tenga la extensión '.pkl'
+            model_path = self.config['file_paths']['model_path']
+        
+            # Si la ruta no termina en '.pkl', la modificamos
+            if not model_path.endswith('.pkl'):
+                model_path = os.path.splitext(model_path)[0] + '.pkl'
+
+            # Guardamos el modelo con pickle
+            with open(model_path, 'wb') as f:
+                pickle.dump(self.model, f)  # Guardamos el modelo entrenado en formato pickle
+
+            # Imprimir y loggear la dirección donde se guardó el modelo
+            print(f"Pickle Model saved successfully at: {model_path}")
+            self.logger.info(f"Pickle Model saved successfully at {model_path}") 
+
+        except Exception as e: 
+            self.logger.error(f"Pickle Unable to save the model: {e}")
 
 
 if __name__ == '__main__':
@@ -86,5 +108,6 @@ if __name__ == '__main__':
     logger = create_logger()
     model = Model(logger=logger)
     model.save_model()
+    model.save_model_pickle()
 
 

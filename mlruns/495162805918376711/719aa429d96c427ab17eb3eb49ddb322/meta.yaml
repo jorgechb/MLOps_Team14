@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/495162805918376711/719aa429d96c427ab17eb3eb49ddb322/artifacts
+end_time: 1731388670793
+entry_point_name: ''
+experiment_id: '495162805918376711'
+lifecycle_stage: active
+run_id: 719aa429d96c427ab17eb3eb49ddb322
+run_name: upbeat-stork-833
+run_uuid: 719aa429d96c427ab17eb3eb49ddb322
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731388670681
+status: 4
+tags: []
+user_id: Jose Manuel Garcia

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/495162805918376711/cac93141b59d45e0b05927bf56fa4cc0/artifacts
+end_time: 1731388189441
+entry_point_name: ''
+experiment_id: '495162805918376711'
+lifecycle_stage: active
+run_id: cac93141b59d45e0b05927bf56fa4cc0
+run_name: rambunctious-bat-636
+run_uuid: cac93141b59d45e0b05927bf56fa4cc0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731388181132
+status: 3
+tags: []
+user_id: Jose Manuel Garcia

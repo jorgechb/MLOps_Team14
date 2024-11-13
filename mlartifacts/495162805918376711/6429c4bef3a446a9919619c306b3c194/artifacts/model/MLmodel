@@ -1,0 +1,39 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.2
+mlflow_version: 2.16.2
+model_size_bytes: 17582
+model_uuid: fce5ad73659f48e0940a6a47ff4a3479
+run_id: 6429c4bef3a446a9919619c306b3c194
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "cap-diameter", "required": true}, {"type":
+    "double", "name": "stem-height", "required": true}, {"type": "long", "name": "does-bruise-or-bleed",
+    "required": true}, {"type": "long", "name": "has-ring", "required": true}, {"type":
+    "double", "name": "cap-color_e", "required": true}, {"type": "double", "name":
+    "cap-color_g", "required": true}, {"type": "double", "name": "cap-color_k", "required":
+    true}, {"type": "double", "name": "cap-color_l", "required": true}, {"type": "double",
+    "name": "cap-color_n", "required": true}, {"type": "double", "name": "cap-color_o",
+    "required": true}, {"type": "double", "name": "cap-color_p", "required": true},
+    {"type": "double", "name": "cap-color_r", "required": true}, {"type": "double",
+    "name": "cap-color_u", "required": true}, {"type": "double", "name": "cap-color_w",
+    "required": true}, {"type": "double", "name": "cap-color_y", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2024-11-12 04:18:18.004546'

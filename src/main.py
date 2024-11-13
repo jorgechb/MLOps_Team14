@@ -97,6 +97,7 @@ class Pipeline:
             self.dataset.transform()
             self.model.train()
             self.model.evaluate()
+            self.model.save_model_pickle()
 
             current_dir = os.getcwd()
 
